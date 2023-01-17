@@ -15,15 +15,15 @@ export const ContactsList = () => {
   const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
-  const visibleTodos = contacts.filter(contact =>
+  const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
   return (
     <>
       <Title>Contacts 📃</Title>
-      {visibleTodos.length ? (
+      {visibleContacts.length ? (
         <List>
-          {visibleTodos.map(({ id, name, number }) => {
+          {visibleContacts.map(({ id, name, number }) => {
             return (
               <Item key={id}>
                 <Contact>

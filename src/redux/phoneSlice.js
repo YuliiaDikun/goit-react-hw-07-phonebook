@@ -29,6 +29,6 @@ const phoneSlice = createSlice({
   },
 });
 
-export const { addContact, deleteContact, fetchingInProgress, fetchingSuccess, fetchingError } = phoneSlice.actions;
+export const { addContact, deleteContact} = phoneSlice.actions;
 
 export const phoneReducer = phoneSlice.reducer;
