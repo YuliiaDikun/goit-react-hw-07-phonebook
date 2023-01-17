@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-
+import { fetchTasks } from "./operations";
 const phoneSlice = createSlice({
   name: 'phone',
   initialState: { items: [], isLoading: false, error: null },
@@ -10,20 +10,21 @@ const phoneSlice = createSlice({
     deleteContact(state, { payload }) {
       state.items = state.items.filter(todo => todo.id !== payload);
     },
-    fetchingInProgress(state) {
+    
+  },
+  extraReducers: {
+    [fetchTasks.pending](state) {
         state.isLoading = true;
         state.error = null;
     },
-    
-    fetchingSuccess(state, {payload}) {
+    [fetchTasks.fulfilled](state, action) {
         state.isLoading = false;
         state.error = null;
-      state.items = payload;
+      state.items = action.payload;
     },
-    
-    fetchingError(state, {payload}) {
+    [fetchTasks.rejected](state, action) {
         state.isLoading = false;
-        state.error = payload;
+        state.error = action.payload;
     },
   },
 });
