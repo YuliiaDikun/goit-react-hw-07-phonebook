@@ -94,6 +94,3 @@ export const LoginForm = () => {
   );
 };
 
-LoginForm.propTypes = {
-  onAddContact: PropTypes.func,
-};

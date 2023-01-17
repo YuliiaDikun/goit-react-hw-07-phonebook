@@ -49,7 +49,3 @@ export const ContactsList = () => {
   );
 };
 
-ContactsList.propTypes = {
-  contacts: PropTypes.arrayOf(PropTypes.object),
-  deleteContact: PropTypes.func,
-};
