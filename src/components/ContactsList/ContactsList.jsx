@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { deleteContact } from 'redux/phoneSlice';
 import { useDispatch } from 'react-redux';
+import { deleteContact } from 'redux/operations';
 import {
   Title,
   List,
@@ -12,9 +12,9 @@ import {
 } from './ContactsList.styled';
 
 export const ContactsList = () => {
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.filter);
   const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.items);
+  const filter = useSelector(state => state.filter.status);
   const visibleContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
@@ -23,17 +23,16 @@ export const ContactsList = () => {
       <Title>Contacts 📃</Title>
       {visibleContacts.length ? (
         <List>
-          {visibleContacts.map(({ id, name, number }) => {
+          {visibleContacts.map(({ id, name, phone }) => {
             return (
               <Item key={id}>
                 <Contact>
-                  {name} {number}
+                  {name} {phone}
                 </Contact>
 
                 <Button
                   onClick={() => {
-                    const action = deleteContact(id);
-                    dispatch(action);
+                    dispatch(deleteContact(id));
                   }}
                   type="button"
                 >

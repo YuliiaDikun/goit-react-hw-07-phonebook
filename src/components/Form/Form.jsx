@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { nanoid } from 'nanoid';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/phoneSlice';
+import { addContact } from 'redux/operations';
 import { Label, Input, Wrapper, ErrorMess, Button } from './Forms.styled';
 
 export const LoginForm = () => {
@@ -51,9 +51,8 @@ export const LoginForm = () => {
       name: values.name,
       phone: values.number,
       id: nanoid(),
-    };
-    const action = addContact(contact);
-    dispatch(action);
+    };    
+    dispatch(addContact(contact));
     resetForm();
   };
 

@@ -17,7 +17,3 @@ export const InputSearch = () => {
     </>
   );
 };
-
-InputSearch.propTypes = {
-  onChange: PropTypes.func,
-};

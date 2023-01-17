@@ -1,7 +1,9 @@
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyleComponent } from 'styles/GlobalStyles';
 import { theme } from 'styles/theme';
+
 import { fetchTasks } from 'redux/operations';
+import { getIsLoading, getError } from 'redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -13,7 +15,9 @@ import { InputSearch } from './InputSearch/InputSearch';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { contacts, isLoading, error } = useSelector(store => store.contacts);
+  
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
   useEffect(() => {
     dispatch(fetchTasks());
   }, [dispatch]);
@@ -24,9 +28,9 @@ export const App = () => {
         <LoginForm />
 
         <InputSearch />
-        {isLoading && <p>Loading contacts...</p>}
-        {error && <p>{error}</p>}
-        <ContactsList />
+        {isLoading && !error && <b>Request in progress...</b>}
+        {!isLoading && <ContactsList />}
+        
       </Container>
 
       <GlobalStyleComponent />
